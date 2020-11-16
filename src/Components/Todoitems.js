@@ -1,13 +1,46 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 export class Todoitems extends Component {
+    getStyle = () => {
+        return {
+            background: '#f5f5f6',
+            padding: '15px',
+            borderBottom: '1px #ccc dotted',
+            textDecoration: this.props.todo.completed ? 'line-through' : 'none'
+        }
+    }
+
+
+
     render() {
+        const { id, title } = this.props.todo;
         return (
-            <div>
-                <p>Hello!</p>
+            <div style={this.getStyle()}>
+
+                <p>
+                    <input type="checkbox" onChange={this.props.markComplete.bind
+                        (this, id)} /> {' '}
+                    {title}
+                    <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}> D </button>
+                </p>
             </div>
         )
     }
+}
+
+// Proptypes
+Todoitems.propTypes = {
+    todos: PropTypes.array.isRequired
+}
+const btnStyle = {
+    background: '#ff0000',
+    color: '#fff',
+    border: 'none',
+    padding: '5px 10px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    float: 'right'
 }
 
 export default Todoitems
